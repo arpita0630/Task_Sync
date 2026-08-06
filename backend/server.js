@@ -6,6 +6,7 @@ const { initDatabase } = require("./controllers/initDb");
 const db = require('./models/connection.js');
 const { authRoute } = require("./routes/authRoutes.js");
 const { projectRoute } = require("./routes/projectRoutes");
+const { taskRoute } = require("./routes/taskRoutes");
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/auth", authRoute);
 app.use("/api/projects", projectRoute);
+app.use("/api", taskRoute); 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
