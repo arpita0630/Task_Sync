@@ -39,7 +39,7 @@ const initDatabase=async()=>{
     `;
 
  try {
-    await query(createTablesQuery);
+    await query(createTableQuery);
     console.log(" Users Table Created");
     console.log(" Projects Table Created");
     console.log(" Project Members Table Created");
