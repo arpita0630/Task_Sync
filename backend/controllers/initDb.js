@@ -36,14 +36,23 @@ const initDatabase=async()=>{
         FOREIGN KEY (assigned_to)
         REFERENCES users_2(id)
     );
-    `;
+   
 
+    CREATE TABLE IF NOT EXISTS activity_logs (
+        id SERIAL PRIMARY KEY,
+        project_id INTEGER REFERENCES projects(id),
+        user_id INTEGER REFERENCES users_2(id),
+        action VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+ `;
  try {
     await query(createTableQuery);
     console.log(" Users Table Created");
     console.log(" Projects Table Created");
     console.log(" Project Members Table Created");
     console.log(" Tasks Table Created");
+    console.log(" Activity Logs Table Created");
   } catch (error) {
     console.log(error);
     process.exit(1);
