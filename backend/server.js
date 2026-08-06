@@ -4,7 +4,8 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const { initDatabase } = require("./controllers/initDb");
 const db = require('./models/connection.js');
-const { authRoute } = require("./routes/authRoute");
+const { authRoute } = require("./routes/authRoutes.js");
+const { projectRoute } = require("./routes/projectRoutes");
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -13,10 +14,11 @@ initDatabase();
 app.get("/", (req, res) => {
     res.json({
         status: "success",
-        message: "TaskSync API is running"
+        message: "Task_Sync API is running"
     });
 });
 app.use("/api/auth", authRoute);
+app.use("/api/projects", projectRoute);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
